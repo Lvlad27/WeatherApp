@@ -1,0 +1,63 @@
+@import '../../../Styles/variables.scss';
+@import '../../../Styles/mixins.scss';
+
+.dark-theme,
+.light-theme {
+  backdrop-filter: blur(16px) saturate(180%);
+  -webkit-backdrop-filter: blur(16px) saturate(180%);
+  border-radius: 0.5rem;
+  padding: 1rem;
+  width: 15%;
+
+  .container-item--title {
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 1rem;
+  }
+
+  .container-item-main {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 1rem;
+
+    &--image {
+      display: flex;
+      flex-flow: column nowrap;
+      align-items: center;
+    }
+
+    .temperature {
+      font-size: 5rem;
+      letter-spacing: -0.1em;
+      line-height: 1;
+      font-weight: 200;
+    }
+  }
+
+  .wrapper-title {
+    display: flex;
+    gap: 2rem;
+  }
+
+  .wrapper {
+    display: flex;
+    gap: 1.5rem;
+    justify-content: center;
+  }
+
+  .container-item--detail {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    justify-content: center;
+    align-items: center;
+  }
+}
+
+@include FavCitiesList(dark-theme, $color-7D, $color-7D, $color-4D);
+@include FavCitiesList(light-theme, $rgba-bg-L, $color-1L, $color-5L);

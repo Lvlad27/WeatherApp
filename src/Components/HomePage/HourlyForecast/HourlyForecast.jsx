@@ -1,10 +1,13 @@
 import { getWeatherSymbol, formatDate } from '../../../Helpers/functions';
 import { opts } from '../../../Helpers/constants';
+import { useSelector } from 'react-redux';
 
 import { WiRaindrop, WiStrongWind } from 'react-icons/wi';
 import styles from './HourlyForecast.module.scss';
 
 function HourlyForecast({ hourlyWeather }) {
+  const theme = useSelector((state) => state.theme);
+
   const listItems = hourlyWeather.forecast.map((item) => {
     return (
       <div className={styles['container__slider-slide']} key={item.time}>
@@ -30,7 +33,7 @@ function HourlyForecast({ hourlyWeather }) {
   });
 
   return (
-    <div className={styles.container}>
+    <div className={styles[`${theme}-theme`]}>
       <h2>Hourly</h2>
       <div className={styles.container__slider}>{listItems}</div>
     </div>

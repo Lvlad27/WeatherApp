@@ -1,36 +1,59 @@
 @import '../../Styles/variables.scss';
+@import '../../Styles/mixins.scss';
 
-.navMenu {
+.dark-theme,
+.light-theme {
   width: 100%;
   margin-bottom: 2rem;
-  background-color: white;
+  transition: ease-in 0.2s;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  transition: all 0.2s ease-in-out;
 
   .container {
-    width: 50%;
-    margin: auto;
-
+    display: flex;
     .nav-items {
+      width: 60%;
+      margin: auto;
       list-style: none;
-      padding: 2rem 0 2rem;
+      padding: 0;
       display: flex;
-      justify-content: space-evenly;
+      justify-content: center;
+      gap: 15rem;
+      align-items: center;
       border-bottom: 1px solid transparent;
-    }
 
-    a {
-      color: $color-1L;
-      list-style: none;
-      text-decoration: none;
-      font-size: $medium-font-size;
-      text-transform: uppercase;
-      font-weight: 700;
-      display: inline-block;
-      width: 8rem;
-      transition: all 0.2s ease-in-out;
+      .theme-switch {
+        align-self: flex-end;
+      }
 
-      &:hover {
-        color: white;
+      a {
+        list-style: none;
+        text-decoration: none;
+        font-size: $medium-font-size;
+        text-transform: uppercase;
+        font-weight: 700;
+        display: inline-block;
+        transition: all 0.2s ease-in-out;
+        position: relative;
+      }
+
+      a.active {
+        position: relative;
+        &::after {
+          content: '';
+          position: absolute;
+          bottom: -0.125rem;
+          left: -0.5rem;
+          right: -0.5rem;
+          height: 0.75rem;
+          background-image: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/664131/underline.svg');
+          background-repeat: no-repeat;
+          background-size: cover;
+        }
       }
     }
   }
 }
+
+@include headerTheme(light-theme, $color-5D, $color-1L, $color-3L);
+@include headerTheme(dark-theme, $color-2D, $color-4D, $color-3L);

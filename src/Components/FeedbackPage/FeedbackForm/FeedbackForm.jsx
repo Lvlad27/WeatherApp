@@ -1,9 +1,10 @@
 import { useEffect, useState } from 'react';
-import { saveData } from '../../../DataService/localDataService';
-import { ErrorMessage } from '../../index';
+import { useSelector } from 'react-redux';
+import { saveState } from '../../../DataService/localDataService';
+import { ErrorMessage } from '../../';
+import { Button } from '../../';
 
 import styles from './FeedbackForm.module.scss';
-import { BiErrorCircle } from 'react-icons/bi';
 
 function FeedbackForm() {
   const initialValues = {
@@ -16,6 +17,7 @@ function FeedbackForm() {
   };
   const [formData, setFormData] = useState(initialValues);
   const [formErrors, setFormErrors] = useState({});
+  const theme = useSelector((state) => state.theme);
 
   function handleChange(event) {
     const { name, value, type, checked } = event.target;
@@ -34,7 +36,7 @@ function FeedbackForm() {
 
   function saveToLocalStorage() {
     if (Object.keys(formErrors).length === 0) {
-      saveData(formData);
+      saveState('formData', formData);
     }
   }
 
@@ -44,8 +46,7 @@ function FeedbackForm() {
 
   function validate(values) {
     const errors = {};
-    const emailRegEx =
-      /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    const emailRegEx = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
     if (!values.username) {
       errors.username = 'Name is required!';
@@ -72,7 +73,7 @@ function FeedbackForm() {
   }
 
   return (
-    <div className={styles.container}>
+    <div className={styles[`${theme}-theme`]}>
       <div className={styles['title-wrapper']}>
         <h2 className={styles.title}>Send Feedback!</h2>
         <h4 className={styles.subtitle}>
@@ -198,7 +199,7 @@ function FeedbackForm() {
           </select>
         </div>
 
-        <button className={styles.btn}>Submit Feedback</button>
+        <Button>Submit Feedback</Button>
       </form>
     </div>
   );

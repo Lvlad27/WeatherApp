@@ -1,5 +1,22 @@
-function saveData(data) {
-  localStorage.setItem('formData', JSON.stringify(data));
+function loadState(name) {
+  try {
+    const serialState = localStorage.getItem(name);
+    if (serialState === null) {
+      return undefined;
+    }
+    return JSON.parse(serialState);
+  } catch (err) {
+    return undefined;
+  }
 }
 
-export { saveData };
+function saveState(name, state) {
+  try {
+    const serialState = JSON.stringify(state);
+    localStorage.setItem(name, serialState);
+  } catch (err) {
+    console.log(err);
+  }
+}
+
+export { loadState, saveState };

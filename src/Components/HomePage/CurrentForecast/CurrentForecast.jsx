@@ -1,11 +1,42 @@
 import { formatDate, getWeatherSymbol } from '../../../Helpers/functions';
 import { opts } from '../../../Helpers/constants';
+import { useSelector } from 'react-redux';
+import { saveFavCity, deleteFavCity } from '../../../redux/locations';
 
+import { AiFillStar, AiOutlineStar } from 'react-icons/ai';
 import styles from './CurrentForecast.module.scss';
 
 function CurrentForecast({ locationData, currWeather }) {
+  const favCityList = useSelector((state) => state.favCityList);
+  const theme = useSelector((state) => state.theme);
+
+  const isFound = favCityList.some((item) => {
+    return item.locationData.id === locationData.id;
+  });
+
+  function onClickSaveCity() {
+    dispatch(saveFavCity({ locationData, currWeather }));
+  }
+
+  function onClickDeleteCity() {
+    dispatch(deleteFavCity({ locationData, currWeather }));
+  }
+
   return (
-    <div className={styles.container}>
+    <div className={styles[`${theme}-theme`]}>
+      {isFound ? (
+        <AiFillStar
+          className={styles.starIcon}
+          title="Delete location from favourites"
+          onClick={onClickDeleteCity}
+        />
+      ) : (
+        <AiOutlineStar
+          className={styles.starIcon}
+          title="Save location as favourite"
+          onClick={onClickSaveCity}
+        />
+      )}
       <div className={styles['container__location']}>
         <p className={styles['location-name']}>{locationData.name}</p>
         <p className={styles['country-name']}>{locationData.country}</p>
