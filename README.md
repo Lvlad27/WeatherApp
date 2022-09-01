@@ -3,7 +3,9 @@
 This project is a Weather App in React.js developed as part of the Frontend training at Coherent Solutions. 
 It's done using the Foreca API.
 
-The project required using basic and advanced React concepts such as Hooks, Context API, React Router, Redux and Unit Testing using Jest. Version control done by Pull Requests through GitHub using Git.
+The project required using basic and advanced React concepts such as Hooks, Context API, React Router, Redux and Unit Testing using Jest. 
+
+Version control done by Pull Requests through GitHub using Git.
 
 ## Installation
 
