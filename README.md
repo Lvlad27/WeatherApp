@@ -42,4 +42,4 @@ Main tasks:
    Implement form submitting mechanism and save it in localStorage.
 6. Implement Dark/Light mode for your app. There should be a switch that changes current view.
 
-Every page has a layout with a header, footer and navigation panel.
+Every page has a layout with a navbar header and footer.
